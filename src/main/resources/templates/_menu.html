@@ -2,13 +2,13 @@
    xmlns:th="http://www.thymeleaf.org"
    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
    
-    <nav class="navbar navbar-expand-lg navbar-light navbar-full" style="background-color: #fff;" id="nav-main">
+    <nav class="navbar navbar-expand-lg navbar-light navbar-full container" style="background-color: #fff;" id="nav-main">
   <a class="navbar-brand" href="#">Spring Shop</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse container-fluid" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
@@ -70,9 +70,9 @@
       </li>
       
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-light my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+    <form class="form-inline my-2 my-lg-0 d-flex">
+      <input class="form-control me-3" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
     </form>
   </div>
 </nav>
