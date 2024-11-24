@@ -11,29 +11,24 @@
 <body>
 
   <th:block th:include="/_menu"></th:block>
-
   <section id="spring1">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
       </ol>
-
       <div class="carousel-inner">
-
-
-
         <div class="carousel-item active">
           <video loop="" autoplay="" playsinline=""
             src="https://brand.assets.adidas.com/video/upload/q_auto,vc_auto/video/upload/global%20brand%20publishing/Running/Faster%20Than/running-ss20-faster-than-launch-hp-masthead-small-ub20-d.mp4"
             style=" width: 100%;"></video>
-
-          <div class="carousel-caption d-none d-md-block">
+          <div class="carousel-caption d-none d-md-block" >
             <h1 style="font-size: 50px; font-weight: 900; margin-bottom: 140px; margin-right: 600px; color: #000;">
               DEMO SPRING SHOP <br>
-              <p style="font-size: 1rem; color: #000;">Iconic Boost. Outrageous energy return. Bold new colors.<br>
+              <p style="font-size: 1rem; color: #000;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo
+                esse quo reiciendis, natus velit architecto obcaecati dolore dolorem id voluptas.<br>
                 Hello, Ultraboost 20.</p>
-              <a th:href="@{/productList}"
-                style="clear:both; background: #000; border: none; color: #fff; font-size: 1em; padding: 10px; cursor: pointer; font-size: 17px;" />SHOP
+              <a class="btn" th:href="@{/productList}"
+                style="clear:both;text-decoration: none ;background: #000; border: none; color: #fff; font-size: 1em; padding: 10px; cursor: pointer; font-size: 17px;" />SHOP
               MEN <span class="fa fa-arrow-right" style="margin-left: 9px;"></span></a>
             </h1>
 
@@ -77,27 +72,29 @@
 
   <!-- ------------------------------carousel end---------------------------------- -->
   <!-- {{-- ======================= start of addias 2 ==================== --}} -->
-  <div class="row">
+  <div class="row m-0">
     <div class="col-md-6 col-xs-12 col-sm-12">
       <div class="position-relative">
-      <img
-        src="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/enUS/Images/training-ss20-IWD2020-tease-hp-teaser-large-v1-d_tcm221-454500.jpg"
-        width="700px" height="500px" style="margin-left: 50px">
+        <img
+          src="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/enUS/Images/training-ss20-IWD2020-tease-hp-teaser-large-v1-d_tcm221-454500.jpg"
+          width="700px" height="500px" style="margin-left: 50px">
         <div class="position-absolute top-50 start-50 translate-middle">
           <h2 class="text-light">PLAY YOUR WAY</h2>
           <p class="text-light">Designed for those who reimagine sport.</p>
-          <p><a class="btn btn-lg btn-dark" th:href="@{/productList}" role="button">SHOP NOW <i class="fa fa-arrow-right"></i></a></p>
+          <p><a class="btn btn-lg btn-dark" th:href="@{/productList}" role="button">SHOP NOW <i
+                class="fa fa-arrow-right"></i></a></p>
         </div>
       </div>
     </div>
     <div class="col-md-6 col-xs-12 col-sm-12">
       <div class="position-relative">
-      <img src="https://i.pinimg.com/736x/2e/2f/c7/2e2fc723669c2022d584b85fdcabb944.jpg" width="700px" height="500px">
-       
-        <div class="position-absolute top-50 start-50 translate-middle"  >
+        <img src="https://i.pinimg.com/736x/2e/2f/c7/2e2fc723669c2022d584b85fdcabb944.jpg" width="700px" height="500px">
+
+        <div class="position-absolute top-50 start-50 translate-middle">
           <h2 class="text-light">WORK IT OUTSIDE</h2>
           <p class="text-light">Get inspired to bootcamp equipment-free.</p>
-          <p><a class="btn btn-lg btn-dark" th:href="@{/productList}" role="button">SHOP NOW <i class="fa fa-arrow-right"></i></a></p>
+          <p><a class="btn btn-lg btn-dark" th:href="@{/productList}" role="button">SHOP NOW <i
+                class="fa fa-arrow-right"></i></a></p>
         </div>
       </div>
     </div>
@@ -267,15 +264,38 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-3">
-          <h6 class="mt-3">DEMO SPRING SHOP </h6>
+          <h6 class="mt-1">DEMO SPRING SHOP </h6>
           <p>
-
-            No. 82, Sin Phyu Shin Avenue, Pyay Road, 6½ Mile, Ward 11, Hlaing Township, Yangon, Myanmar<br>
-            +95-1-9351000
+            Gồm các thành viên:
+            <br>
+            - Đặng Thanh Sang
+            <br>
+            - Nguyễn Thiện Dương
+            <br>
+            - Nguyễn Văn Quân
+            <br>
+            - Thạch Quốc Lâm
           </p>
         </div>
         <div class="col-sm-3">
+          <div class="mapswrapper"><iframe width="250" height="250" loading="lazy" allowfullscreen
+              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=H%E1%BB%93%20Ch%C3%AD%20Minh&zoom=13&maptype=roadmap"></iframe>
+            <style>
+              .mapswrapper iframe {
+                border: 0;
+                position: relative;
+                z-index: 2
+              }
 
+              .mapswrapper a {
+                color: rgba(0, 0, 0, 0);
+                position: absolute;
+                left: 0;
+                top: 0;
+                z-index: 0
+              }
+            </style>
+          </div>
         </div>
         <div class="col-sm-3">
           <a href="">About DEMO SPRING SHOP</a>
@@ -300,13 +320,6 @@
       </div>
       <hr>
       <div class="row">
-        <div class="col-sm-6">
-          <p>Demo Spring Shop | Đặng Thanh Sang | Nguyễn Thiện Dương | Nguyễn Văn Quân | Thạch Quốc Lâm</p>
-        </div>
-        <div class="col-sm-6">
-
-        </div>
-        <hr>
         <a href="" style="margin-left: 1rem">Privacy Policy | SPRING SHOP Rewards Terms of Use</a>
       </div>
     </div>
