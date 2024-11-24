@@ -19,9 +19,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.dao.AccountDAO;
 import com.example.demo.dao.OrderDAO;
 import com.example.demo.dao.ProductDAO;
+import com.example.demo.entity.Account;
 import com.example.demo.entity.Product;
+import com.example.demo.form.AccountForm;
 import com.example.demo.form.ProductForm;
 import com.example.demo.model.OrderDetailInfo;
 import com.example.demo.model.OrderInfo;
@@ -40,6 +43,9 @@ public class AdminController {
  
    @Autowired
    private ProductFormValidator productFormValidator;
+
+   @Autowired
+   private AccountDAO accountDAO;
  
    @InitBinder
    public void myInitBinder(WebDataBinder dataBinder) {
@@ -60,6 +66,39 @@ public class AdminController {
  
       return "login";
    }
+
+   @RequestMapping(value = { "/admin/register" }, method = RequestMethod.GET)
+   public String register(Model model) {     
+      AccountForm accountForm = new AccountForm();
+      model.addAttribute("accountForm", accountForm);
+      return "register";
+   }
+
+   // POST: Handle Account Registration
+   @RequestMapping(value = { "/admin/register" }, method = RequestMethod.POST)
+   public String registerSave(Model model,
+      @ModelAttribute("accountForm") @Validated AccountForm accountForm,
+      BindingResult result,
+      final RedirectAttributes redirectAttributes) {
+
+      if (result.hasErrors()) {
+         return "register";
+      }
+
+      try {
+         accountDAO.save(accountForm);
+      } catch (Exception e) {
+         Throwable rootCause = ExceptionUtils.getRootCause(e);
+         String message = rootCause.getMessage();
+         model.addAttribute("errorMessage", message);
+         return "register";
+      }
+
+      redirectAttributes.addFlashAttribute("message", "Account registered successfully!");
+      return "redirect:/admin/login";
+   }
+
+
  
    @RequestMapping(value = { "/admin/accountInfo" }, method = RequestMethod.GET)
    public String accountInfo(Model model) {
@@ -113,8 +152,8 @@ public class AdminController {
    // POST: Save product
    @RequestMapping(value = { "/admin/product" }, method = RequestMethod.POST)
    public String productSave(Model model, //
-         @ModelAttribute("productForm") @Validated ProductForm productForm, //
-         BindingResult result, //
+         @ModelAttribute("productForm") @Validated ProductForm productForm,
+         BindingResult result,
          final RedirectAttributes redirectAttributes) {
  
       if (result.hasErrors()) {

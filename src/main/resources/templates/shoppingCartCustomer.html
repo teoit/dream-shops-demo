@@ -3,64 +3,61 @@
    <head>
       <meta charset="UTF-8">
       <title>Spring Shop Online</title>
-      <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
       <th:block th:include="/_header"></th:block>
    </head>
    <body>
       
       <th:block th:include="/_menu"></th:block>
        
-      <div class="container">
-      	<div class="row">
-      		<div class="col-lg-6 offset-3">
-       
-       <div class="bd-example">
-      <h3>Enter Customer Information</h3>
-       <form method="POST" th:object = "${customerForm}" th:action="@{/shoppingCartCustomer}">
-		  <div class="form-group">
-		    <label for="exampleInputEmail1">CustomerName</label>
-		    <input type="text" class="form-control" id="exampleInputEmail1" th:field="*{name}">
-		    <span class="error-message"
-                     th:if="${#fields.hasErrors('name')}" th:errors="*{name}">..</span>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="exampleInputEmail1">Email</label>
-		    <input type="email" class="form-control" id="exampleInputEmail1" th:field="*{email}">
-		    <span class="error-message"
-                     th:if="${#fields.hasErrors('email')}" th:errors="*{email}">..</span>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="exampleInputEmail1">Phone</label>
-		    <input type="text" class="form-control" id="exampleInputEmail1" th:field="*{phone}">
-		    <span class="error-message"
-                     th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">..</span>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="exampleInputPassword1">Address</label>
-		    <textarea th:field="*{address}" class="form-control"></textarea>
-		    <span class="error-message"
-                     th:if="${#fields.hasErrors('address')}" th:errors="*{address}">..</span>
-		    
-		  </div>
-		 
-		  <input type="submit" value="Submit" class="btn btn-primary"/> 
-		  <input type="reset" class="btn btn-outline-primary"
-                  value="Reset" />
-		</form>
+      <div class="container mt-5">
+         <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+      
+               <div class="bd-example">
+                  <h3>Enter Customer Information</h3>
+                  <form method="POST" th:object="${customerForm}" th:action="@{/shoppingCartCustomer}">
+                     
+                     <!-- Customer Name -->
+                     <div class="mb-3">
+                        <label for="customerName" class="form-label">Customer Name</label>
+                        <input type="text" class="form-control" id="customerName" th:field="*{name}" required>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                     </div>
+                     
+                     <!-- Email -->
+                     <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" th:field="*{email}" required>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                     </div>
+                     
+                     <!-- Phone -->
+                     <div class="mb-3">
+                        <label for="phone" class="form-label">Phone</label>
+                        <input type="text" class="form-control" id="phone" th:field="*{phone}" required>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
+                     </div>
+                     
+                     <!-- Address -->
+                     <div class="mb-3">
+                        <label for="address" class="form-label">Address</label>
+                        <textarea class="form-control" id="address" th:field="*{address}" required></textarea>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
+                     </div>
+                     
+                     <!-- Submit and Reset buttons -->
+                     <button type="submit" class="btn btn-primary">Submit</button>
+                     <button type="reset" class="btn btn-outline-primary">Reset</button>
+                  </form>
+               </div>
 
-      
+            </div>
+         </div>
       </div>
-       </div>
-      	</div>
-      </div> 
-      
-      <!-- ------------------------------container end---------------------------------- -->
-      
        
       <th:block th:include="/_footer"></th:block>
-       
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
    </body>
-</html></html>
+</html>

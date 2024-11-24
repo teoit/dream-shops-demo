@@ -34,16 +34,21 @@ public PasswordEncoder passwordEncoder() {
 	 
 	   @Override
 	   protected void configure(HttpSecurity http) throws Exception {
-	 
-	      http.csrf().disable();
-	 
-	      // Requires login with role ROLE_EMPLOYEE or ROLE_MANAGER.
-	      // If not, it will redirect to /admin/login.
-	      http.authorizeRequests().antMatchers("/admin/orderList", "/admin/order", "/admin/accountInfo")//
-	            .access("hasAnyRole('ROLE_EMPLOYEE', 'ROLE_MANAGER')");
-	 
-	      // Pages only for MANAGER
-	      http.authorizeRequests().antMatchers("/admin/product").access("hasRole('ROLE_MANAGER')");
+
+           http.csrf(csrf -> csrf.disable());
+
+           // Requires login with role ROLE_EMPLOYEE or ROLE_MANAGER.
+           // If not, it will redirect to /admin/login.
+           http.authorizeRequests(requests -> requests.antMatchers(
+			"/admin/orderList",
+			"/admin/order",
+			"/admin/accountInfo")
+            .access("hasAnyRole('ROLE_EMPLOYEE', 'ROLE_MANAGER')"));
+
+           // Pages only for MANAGER
+           http.authorizeRequests(requests -> requests.antMatchers(
+			"/admin/product")
+			.access("hasRole('ROLE_MANAGER')"));
 	 
 	      // When user login, role XX.
 	      // But access to the page requires the YY role,
