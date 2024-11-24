@@ -1,143 +1,97 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-   <head>
-      <meta charset="UTF-8">
-      <title>Spring Shop Online</title>
-      <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
-      <th:block th:include="/_header"></th:block>
-   </head>
-   <style type="text/css">
-      .spring-btn-black{
-            clear:both; background: #000; border: none; color: #fff; font-size: 1em; padding: 10px; cursor: pointer; font-size: 17px;
-      }
-      
-    a:hover{
-        color: #fff;
-        font-weight: bold;
-      }
-      h1{
-        font-weight: bold;
-        margin-bottom: 2rem;
-      }
-      .container{
-        color: #000;
-      }
-      ul li {
-        list-style: none;
-        margin: 0.5rem;
-      }
 
-      #spring_col1{
-        color: #000;
-      }
-      #spring_col1 a{
-        color: #000;
-        text-decoration: underline;
-      }
+<head>
+  <meta charset="UTF-8">
+  <title>Spring Shop Online</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" />
+  <th:block th:include="/_header"></th:block>
+</head>
 
-      #spring_col1 a:hover{
-        color: #fff;
-        background-color: #000;
+<body>
 
-      }
-      
-      html, body{
-	height: 100%;
-	font-family: 'Lato', sans-serif;
-	font-family: 'Open Sans', sans-serif;
-	font-family: 'Abel', sans-serif;
-}
-  </style>
-   <body>
-      
-      <th:block th:include="/_menu"></th:block>
-      
-      <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-sm-8 col-xs-12">
-                <section id="spring_col1">
-                <h1>LOG IN</h1>
-                    
-                <a href="">Forgot Your Password?</a>
-                
-                <!-- /login?error=true -->
-         <th:block th:if="${#session != null && #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}">
-             <div th:if= "${#request.getParameter('error') == 'true'}"
-                style="color: red; margin: 10px 0px;">
-                Login Failed!!!<br /> Reason :
-                <span th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}"></span>
-             </div>
-         </th:block>
+  <th:block th:include="/_menu"></th:block>
 
-                <form method="POST" th:action="@{/j_spring_security_check}">
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Username</label>
-                    <input type="text" name="userName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-                  </div>
-                  <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                  </div>
-                  <button type="submit" class="spring-btn-black">LOG IN <span class="fa fa-arrow-right" style="margin-left: 9px;"></span></button>
-				
-                </form>
-                
-                <span class="error-message" th:utext="${error}"></span>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
+        <section id="spring_col1">
+          <h1 class="text-center mb-4">LOG IN</h1>
 
-                <br><br>
+          <a href="#" class="d-block text-end mb-3">Forgot Your Password?</a>
 
-                By clicking 'Log In' you agree to our website <a href="">Creators Club Terms & Conditions </a>,  <a href="">Spring Privacy Notice</a> and  <a href="">Terms & Conditions</a>.
+          <!-- Error message display -->
+          <th:block th:if="${#session != null && #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}">
+            <div th:if="${#request.getParameter('error') == 'true'}" class="alert alert-danger">
+              Login Failed!!!<br /> Reason :
+              <span th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}"></span>
+            </div>
+          </th:block>
 
-               <!--  ----------- form end -------------- -->
+          <form method="POST" th:action="@{/j_spring_security_check}">
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" name="userName" class="form-control" id="username" required aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" name="password" class="form-control" id="password" required>
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="rememberMe">
+              <label class="form-check-label" for="rememberMe">Remember Me</label>
+            </div>
+            <button type="submit" class="btn btn-dark w-100">
+              LOG IN <span class="fa fa-arrow-right ms-2"></span>
+            </button>
+          </form>
 
+          <span class="error-message text-danger" th:utext="${error}"></span>
 
-               </section>
-                <div style="text-align:left">
+          <br><br>
+
+          <p class="text-center">By clicking 'Log In' you agree to our website <a href="#">Creators Club Terms & Conditions</a>, 
+          <a href="#">Spring Privacy Notice</a>, and <a href="#">Terms & Conditions</a>.</p>
+
+        </section>
+        <div class="text-start mt-4">
           <h3>User/Password:</h3>
-          <ul>        
-             <li>employee1/123</li>
-             <li>manager1/123</li>   
+          <ul>
+            <li>employee1/123</li>
+            <li>manager1/123</li>
           </ul>
-            </div>
-            </div>
-            
-            <div class="col-lg-6 col-sm-4 col-xs-12">
-                
-                <h1>JOIN THE CLUB. GET REWARDED.</h1>
-                    Join the adidas Creators Club membership program:
-                  <ul >
-                      <li ><i class="fas fa-check"></i> Get immediate access to all Challenger level rewards</li>
-                      <li><i class="fas fa-check"></i> Earn access to shop limited edition products</li>
-                      <li ><i class="fas fa-check"></i> Level up for exclusive access to sport, yoga and music events</li>
-                      <li ><i class="fas fa-check"></i> Receive our best special offers and promotions</li>
-                     
-                    </ul>  
-
-                    Join now and start earning points to access new levels and rewards. It's time to unlock the best of adidas.
-                    <br><br>
-                <a href=""  class="spring-btn-black" />JOIN THE CLUB <span class="fa fa-arrow-right" style="margin-left: 9px;"></span></a>
-
-                <br><br>
-
-                <img src="https://www.adidas.com/glass/react/ce0f36d/assets/img/CC2.0_my_account_register.jpg">
-            
-                
-            </div>
         </div>
-    </div>
-    
+      </div>
 
-        <!-- ------------------------------Login page end---------------------------------- -->
-      
-       
-   
-       
-      <th:block th:include="/_footer"></th:block>
-       
-   </body>
+      <div class="col-lg-6 col-md-4 col-sm-12 d-none d-md-block">
+        <h1>JOIN THE CLUB. GET REWARDED.</h1>
+        <p>Join the adidas Creators Club membership program:</p>
+        <ul>
+          <li><i class="fas fa-check"></i> Get immediate access to all Challenger level rewards</li>
+          <li><i class="fas fa-check"></i> Earn access to shop limited edition products</li>
+          <li><i class="fas fa-check"></i> Level up for exclusive access to sport, yoga, and music events</li>
+          <li><i class="fas fa-check"></i> Receive our best special offers and promotions</li>
+        </ul>
+
+        <p>Join now and start earning points to access new levels and rewards. It's time to unlock the best of adidas.</p>
+        <br><br>
+        <a href="#" class="btn btn-dark w-100">
+          JOIN THE CLUB <span class="fa fa-arrow-right ms-2"></span>
+        </a>
+
+        <br><br>
+
+        <a class="btn btn-success w-100" href="/admin/register">Register</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 JS and Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+  <th:block th:include="/_footer"></th:block>
+
+</body>
+
 </html>

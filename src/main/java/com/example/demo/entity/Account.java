@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
 @Entity
 @Table(name = "Accounts")
 public class Account implements Serializable {
@@ -15,6 +17,19 @@ public class Account implements Serializable {
  
     public static final String ROLE_MANAGER = "MANAGER";
     public static final String ROLE_EMPLOYEE = "EMPLOYEE";
+
+     // Constructor mặc định
+    public Account() {
+    }
+
+    // Constructor tiện ích
+    public Account(String userName, String rawPassword, boolean active, String userRole) {
+        this.userName = userName;
+        this.encrytedPassword = BCrypt.hashpw(rawPassword, BCrypt.gensalt());
+        this.active = active;
+        this.userRole = userRole;
+    }
+    
  
     @Id
     @Column(name = "User_Name", length = 20, nullable = false)

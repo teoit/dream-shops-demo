@@ -4,92 +4,90 @@
       <meta charset="UTF-8">
       <title>Spring Shop Online</title>
       <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
       <th:block th:include="/_header"></th:block>
    </head>
    <style>
-   	.box {
-    width: 230px;
-    height: 155px;
-    margin-bottom: 5px;
-	}
-	
+      .box {
+         width: 230px;
+         height: 155px;
+         margin-bottom: 5px;
+      }
+
+      .display img {
+         width: 100%;
+         height: 320px;
+         object-fit: cover;
+         margin-bottom: 5px;
+         margin-right: 2px;
+      }
+
+      .h6_offer {
+         font-weight: bold;
+         font-size: 14px;
+      }
+
+      .product-container {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 15px;
+         justify-content: space-between;
+      }
+
+      .product-item {
+         width: 100%;
+         max-width: 280px;
+         margin-bottom: 20px;
+      }
    </style>
    <body>
-      
       <th:block th:include="/_menu"></th:block>
-      
-      
-  
-    <div class="container">
-        <h2 style="font-weight: bold;">Product List</h2>
-        
-        
-        <div class="row">
-          <div class="col-md-12 col-sm-12">
-           <div class="row">
-            
-            <div th:each="prodInfo : ${paginationProducts.list}">
-             <div class="">
-              <div class="display">
-     <img th:src="@{|/productImage?code=${prodInfo.code}|}" alt="..." 
-     style="width:280px; height:320px; margin-bottom:5px; margin-right:2px;">
-     <div class="box">
-      <h6 class="h6_offer">Originals</h6>
-      <p style="font-size:13px;"><span th:utext="${prodInfo.name}"></span><br>
-        $<span th:utext="${prodInfo.price}"></span>
-      </p>
-      <h6 class="h6_offer">2 colors</h6>
-      <a th:href="@{|/buyProduct?code=${prodInfo.code}|}" class="btn btn-link" >Buy Now</a>
+
+      <div class="container">
+         <h2 class="fw-bold">Product List</h2>
+
+         <div class="row">
+            <div th:each="prodInfo : ${paginationProducts.list}" class="col-md-3 col-sm-6">
+               <div class="product-item">
+                  <div class="display">
+                     <img th:src="@{|/productImage?code=${prodInfo.code}|}" alt="...">
+                     <div class="box">
+                        <h6 class="h6_offer">Originals</h6>
+                        <p style="font-size:13px;">
+                           <span th:utext="${prodInfo.name}"></span><br>
+                           $<span th:utext="${prodInfo.price}"></span>
+                        </p>
+                        <h6 class="h6_offer">2 colors</h6>
+                        <a th:href="@{|/buyProduct?code=${prodInfo.code}|}" class="btn btn-link">Buy Now</a>
+                     </div>
+                  </div>
+
+                  <!-- For Manager edit Product -->
+                  <th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
+                     <a style="color:red;" th:href="@{|/admin/product?code=${prodInfo.code}|}">Edit Product</a>
+                  </th:block>
+               </div>
             </div>
-             </div>
-             
-             <!-- For Manager edit Product -->
-            <th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
-               
-                 <a style="color:red;"
-                    th:href="@{|/admin/product?code=${prodInfo.code}|}">Edit Product</a>
-               
-            </th:block>
+         </div>
+
+         <!-- Pagination -->
+         <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+               <div th:if="${paginationProducts.totalPages > 1}">
+                  <th:block th:each="page : ${paginationProducts.navigationPages}">
+                     <a th:href="@{|/productList?page=${page}|}" th:if="${page != -1}"
+                        class="btn btn-dark" style="border-radius: 0%; margin:2px;" th:utext="${page}"></a>
+
+                     <span class="btn btn-dark" style="border-radius: 0%; margin:2px;" th:if="${page == -1}"> ... </span>
+                  </th:block>
+               </div>
             </div>
-       		</div>
-      
-       
-      
-       
-      <br/>
-    
-      <!-- ------------------------------Offer end---------------------------------- -->
-      
-      </div> 
-
-
-          </div>
-        </div>
-        <br><br>
-  <!-- nav start  -->
-  		<div class="row">
-  		<div class="col-lg-6 offset-4">
-        <div class="" th:if="${paginationProducts.totalPages > 1}">
-         <th:block th:each="page : ${paginationProducts.navigationPages}">
-         
-            <a th:href="@{|/productList?page=${page}|}" th:if="${page != -1}"
-               class="btn btn-dark" style="border-radius: 0%; margin:2px;" th:utext="${page}"></a>
-               
-            <span class="btn btn-dark" style="border-radius: 0%; margin:2px;" th:if="${page == -1}"> ... </span>
-             
-         </th:block>
          </div>
-         </div>
-      </div> <!-- nav end -->
-    </div><!-- container end -->
-  
+      </div>
 
-
-<!-- ------------------------------Offer end---------------------------------- -->
-      
-      
-       
       <th:block th:include="/_footer"></th:block>
-       
+
+      <!-- Optional Bootstrap 5 JS -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
    </body>
 </html>

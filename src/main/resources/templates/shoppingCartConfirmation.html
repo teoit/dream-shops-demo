@@ -3,73 +3,116 @@
    <head>
       <meta charset="UTF-8">
       <title>Spring Shop Online</title>
-      <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
       <th:block th:include="/_header"></th:block>
+      <style>
+         .page-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+         }
+         .customer-info-container ul {
+            list-style-type: none;
+            padding-left: 0;
+         }
+         .customer-info-container li {
+            margin-bottom: 10px;
+         }
+         .product-preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+         }
+         .product-preview-container ul {
+            width: 100%;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+         }
+         .product-preview-container img {
+            max-width: 100px;
+            max-height: 100px;
+            object-fit: cover;
+         }
+         .button-send-sc {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+         }
+         .button-send-sc:hover {
+            background-color: #0056b3;
+         }
+         .navi-item {
+            display: inline-block;
+            margin: 10px 15px;
+            color: #007bff;
+            text-decoration: none;
+         }
+         .navi-item:hover {
+            text-decoration: underline;
+         }
+      </style>
    </head>
    <body>
-      
       <th:block th:include="/_menu"></th:block>
        
-      <div class="page-title">Confirmation</div>
-      <div class="customer-info-container">
-         <h3>Customer Information:</h3>
-         <ul>
-            <li>Name: <span th:utext="${myCart.customerInfo.name}"></span></li>
-            <li>Email: <span th:utext="${myCart.customerInfo.email}"></span></li>
-            <li>Phone: <span th:utext="${myCart.customerInfo.phone}"></span></li>
-            <li>Address: <span th:utext="${myCart.customerInfo.address}"></span></li>
-         </ul>
-         <h3>Cart Summary:</h3>
-         <ul>
-            <li>Quantity: <span th:utext="${myCart.quantityTotal}"></span>$</li>
-            <li>Total:
-               <span class="total"
-                  th:utext="${#numbers.formatDecimal(myCart.amountTotal,3,2,'COMMA')}">  
-               </span>
-            </li>
-         </ul>
-      </div>
-      <form method="POST" th:action="@{/shoppingCartConfirmation}">
-         <!-- Edit Cart -->
-         <a class="navi-item" th:href="@{/shoppingCart}">
-         Edit Cart
-         </a>
-         <!-- Edit Customer Info -->
-         <a class="navi-item" th:href="@{/shoppingCartCustomer}">
-         Edit Customer Info
-         </a>
-         <!-- Send/Save -->
-         <input type="submit" value="Send" class="button-send-sc" />
-      </form>
-      <div class="container">
-         <div class="product-preview-container" th:each="cartLineInfo : ${myCart.cartLines}">
+      <div class="container mt-5">
+         <div class="page-title">Confirmation</div>
+
+         <div class="customer-info-container mb-4">
+            <h3>Customer Information:</h3>
             <ul>
-               <li>
-                  <img class="product-image"
-                     src="@{|/productImage?code=${cartLineInfo.productInfo.code}|}" />
-               </li>
-               <li>
-                  Code: <span th:utext="${cartLineInfo.productInfo.code}"></span>
-                  <input
-                     type="hidden" name="code" th:value="${cartLineInfo.productInfo.code}" />
-               </li>
-               <li>Name: <span th:utext="${cartLineInfo.productInfo.name}"></span></li>
-               <li>Price:
-                  <span class="price"
-                     th:utext="${#numbers.formatDecimal(cartLineInfo.productInfo.price,3,2,'COMMA')}">
-                  </span>
-               </li>
-               <li>Quantity: <span th:utext="${cartLineInfo.quantity}"></span></li>
-               <li>Subtotal:
-                  <span class="subtotal"
-                     th:utext="${#numbers.formatDecimal(cartLineInfo.amount,3,2,'COMMA')}">
+               <li>Name: <span th:utext="${myCart.customerInfo.name}"></span></li>
+               <li>Email: <span th:utext="${myCart.customerInfo.email}"></span></li>
+               <li>Phone: <span th:utext="${myCart.customerInfo.phone}"></span></li>
+               <li>Address: <span th:utext="${myCart.customerInfo.address}"></span></li>
+            </ul>
+            <h3>Cart Summary:</h3>
+            <ul>
+               <li>Quantity: <span th:utext="${myCart.quantityTotal}"></span> items</li>
+               <li>Total: 
+                  <span class="total" th:utext="${#numbers.formatDecimal(myCart.amountTotal, 3, 2, 'COMMA')}">
                   </span>
                </li>
             </ul>
          </div>
+
+         <form method="POST" th:action="@{/shoppingCartConfirmation}" class="mb-4">
+            <!-- Edit Cart -->
+            <a class="navi-item" th:href="@{/shoppingCart}">Edit Cart</a>
+            <!-- Edit Customer Info -->
+            <a class="navi-item" th:href="@{/shoppingCartCustomer}">Edit Customer Info</a>
+            <!-- Send/Save -->
+            <input type="submit" value="Send" class="button-send-sc" />
+         </form>
+
+         <div class="product-preview-container">
+            <div th:each="cartLineInfo : ${myCart.cartLines}">
+               <ul class="d-flex flex-column">
+                  <li>
+                     <img class="product-image" th:src="@{|/productImage?code=${cartLineInfo.productInfo.code}|}" />
+                  </li>
+                  <li>Code: <span th:utext="${cartLineInfo.productInfo.code}"></span></li>
+                  <li>Name: <span th:utext="${cartLineInfo.productInfo.name}"></span></li>
+                  <li>Price:
+                     <span class="price" th:utext="${#numbers.formatDecimal(cartLineInfo.productInfo.price, 3, 2, 'COMMA')}"></span>
+                  </li>
+                  <li>Quantity: <span th:utext="${cartLineInfo.quantity}"></span></li>
+                  <li>Subtotal: 
+                     <span class="subtotal" th:utext="${#numbers.formatDecimal(cartLineInfo.amount, 3, 2, 'COMMA')}"></span>
+                  </li>
+               </ul>
+            </div>
+         </div>
       </div>
-       
+
       <th:block th:include="/_footer"></th:block>
-       
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
    </body>
 </html>
